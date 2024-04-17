@@ -24,14 +24,23 @@ jugador2 = Jugador(pos_x=Constantes.POSICION_JUG_2_X, pos_y=posicion_vertical_ce
 def PrintObjetos():
     finestraJoc.fill(Constantes.COLOR_BORDE)
     pygame.draw.rect(finestraJoc, Constantes.COLOR_TABLERO, Constantes.ZONA_JUEGO)
-    pygame.draw.rect(finestraJoc, jugador1.color, (jugador1.pos_x, jugador2.pos_y, jugador1.medida_x, jugador1.medida_y))
-    pygame.draw.rect(finestraJoc, jugador2.color, (jugador2.pos_x, jugador2.pos_y, jugador2.medida_x, jugador2.medida_y))
+    pygame.draw.rect(finestraJoc, jugador1.color,
+                     (jugador1.pos_x, jugador1.pos_y, jugador1.medida_x, jugador1.medida_y))
+    pygame.draw.rect(finestraJoc, jugador2.color,
+                     (jugador2.pos_x, jugador2.pos_y, jugador2.medida_x, jugador2.medida_y))
 
 
 def DetectarEventos():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+
+def mover_jugador(tecla_presionada, jugador, arriba_tecla, abajo_tecla):
+    if tecla_presionada[arriba_tecla] and jugador.pos_y > Constantes.ZONA_JUEGO[1]:
+        jugador.pos_y -= jugador.velocidad
+    if tecla_presionada[abajo_tecla] and jugador.pos_y + jugador.medida_y < Constantes.ZONA_JUEGO[3] + 15:
+        jugador.pos_y += jugador.velocidad
 
 
 while not gameOver:
@@ -42,3 +51,11 @@ while not gameOver:
     # Control de los frames
     rellotge.tick(Constantes.RELOJ)
     pygame.display.update()
+
+    tecla_presionada = pygame.key.get_pressed()
+
+    # Llamada para mover jugador 1 (teclas "w" y "s")
+    mover_jugador(tecla_presionada, jugador1, pygame.K_w, pygame.K_s)
+
+    # Llamada para mover jugador 2 (flechas arriba y abajo)
+    mover_jugador(tecla_presionada, jugador2, pygame.K_UP, pygame.K_DOWN)

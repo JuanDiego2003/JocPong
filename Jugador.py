@@ -1,7 +1,8 @@
 class Jugador:
-    def __init__(self, pos_x, pos_y, color, medida_x, medida_y):
+    def __init__(self, pos_x, pos_y, color, medida_x, medida_y, velocidad=10):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.color = color
         self.medida_x = medida_x
         self.medida_y = medida_y
+        self.velocidad = velocidad
