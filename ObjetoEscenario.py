@@ -12,6 +12,3 @@ class ObjetoEscenario:
     def Pintar(self, finestraJoc):
         pygame.draw.rect(finestraJoc, self.color,
                          (self.pos_x, self.pos_y, self.medida_x, self.medida_y))
-
-    def Pintar_pelota(self, finestraJoc):
-        pass
