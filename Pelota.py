@@ -24,6 +24,22 @@ class Pelota(ObjetoEscenario):
 
         super().Pintar(finestraJoc)
 
+    def accion_jugador1(self, jugador1):
+        if (self.posicio_x - self.velocitad_x < jugador1.pos_x + jugador1.medida_x and jugador1.pos_y <
+                self.velocitad_y > jugador1.medida_y):
+            self.posicio_x = jugador1.pos_x + jugador1.medida_x
+        if (jugador1.pos_x <= self.posicio_x <= jugador1.pos_x + jugador1.medida_x and
+                jugador1.pos_y <= self.posicio_y <= jugador1.pos_y + jugador1.medida_y):
+            self.comprobar_positivo_negativo()
+
+    def accion_jugador2(self, jugador2):
+        if (self.posicio_x + self.velocitad_x + self.medida > jugador2.pos_x and jugador2.pos_y <
+                self.velocitad_y > jugador2.medida_y):
+            self.posicio_x = jugador2.pos_x
+        if (jugador2.pos_x <= self.posicio_x + self.medida <= jugador2.pos_x + jugador2.medida_x and
+                jugador2.pos_y <= self.posicio_y + self.medida <= jugador2.pos_y + jugador2.medida_y):
+            self.comprobar_positivo_negativo()
+
     def Reaccion_pelota(self, jugador1, jugador2, posicion_horizontal_central, posicion_vertical_central_self):
 
         # Mover la pelota
@@ -32,34 +48,12 @@ class Pelota(ObjetoEscenario):
 
         # Detectar colisión con los bordes superior e inferior
         if (self.posicio_y <= Constantes.ZONA_JUEGO[1] or self.posicio_y + self.medida >=
-                Constantes.ZONA_JUEGO[3]
-                + 15):
-            # Invertir la componente Y de la velocidad
+                Constantes.ZONA_JUEGO[3] + Constantes.ZONA_JUEGO[1]):
             self.velocitad_y *= -1
-        #
-        if (self.posicio_x - self.velocitad_x < jugador1.pos_x + jugador1.medida_x and jugador1.pos_y <
-                self.velocitad_y > jugador1.medida_y):
-            self.posicio_x = jugador1.pos_x + jugador1.medida_x
-        if (jugador1.pos_x <= self.posicio_x + self.medida / 2 <= jugador1.pos_x + jugador1.medida_x and
-                jugador1.pos_y <= self.posicio_y + self.medida <= jugador1.pos_y +
-                jugador1.medida_y):
 
-            if jugador1.pos_y <= self.posicio_y + self.medida <= jugador1.pos_y + jugador1.medida_y:
-                self.comprobar_positivo_negativo()
-            else:
-                self.comprobar_positivo_negativo()
-        #
-        if (self.posicio_x + self.velocitad_x + self.medida > jugador2.pos_x and jugador2.pos_y <
-                self.velocitad_y > jugador2.medida_y):
-            self.posicio_x = jugador2.pos_x
-        if (jugador2.pos_x <= self.posicio_x + self.medida <= jugador2.pos_x + jugador2.medida_x and
-                jugador2.pos_y <= self.posicio_y + self.medida <= jugador2.pos_y +
-                jugador2.medida_y):
-
-            if jugador2.pos_y <= self.posicio_y + self.medida <= jugador2.pos_y + jugador2.medida_y:
-                self.comprobar_positivo_negativo()
-            else:
-                self.comprobar_positivo_negativo()
+        # acciones al colisionar con jugadores
+        self.accion_jugador1(jugador1)
+        self.accion_jugador2(jugador2)
 
         # fuera de la zona de juego
         if self.posicio_x + self.medida >= Constantes.TAMANO_VENTANA[0] + 15 or self.posicio_x - self.medida <= -15:
@@ -85,4 +79,3 @@ class Pelota(ObjetoEscenario):
         while -2 <= velocidad_x <= 2 or velocidad_x == 0:
             self.velocitad_x = random.randint(-5, 5)
             velocidad_x = self.velocitad_x
-        self.velocitad_y = random.randint(-5, 5)

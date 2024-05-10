@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b43aa25e-d389-44c5-89d7-a155598f91b2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jugador.py" beforeDir="false" afterPath="$PROJECT_DIR$/Jugador.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ObjetoEscenario.py" beforeDir="false" afterPath="$PROJECT_DIR$/ObjetoEscenario.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pelota.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pelota.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,26 +74,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Pelota.py</url>
-          <line>73</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Pelota.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Jugador.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
