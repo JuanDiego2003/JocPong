@@ -1,5 +1,5 @@
 import pygame
-
+import random
 import Constantes
 from ObjetoEscenario import ObjetoEscenario
 
@@ -10,7 +10,7 @@ class Pelota(ObjetoEscenario):
     medida = 10
 
     def __init__(self, posicion_x, posicion_y, velocitad_x, velocitad_y, color):
-        super().__init__(posicion_x, posicion_y, color)
+        super().__init__(posicion_x, posicion_y, self.medida, self.medida, color)
         self.posicio_x = posicion_x
         self.posicio_y = posicion_y
         self.velocitad_x = velocitad_x
@@ -18,8 +18,11 @@ class Pelota(ObjetoEscenario):
         self.color = color
 
     def Pintar(self, finestraJoc):
-        pygame.draw.rect(finestraJoc, self.color,
-                         (self.posicio_x, self.posicio_y, self.medida, self.medida))
+        pass
+        super().__setattr__("pos_x", self.posicio_x)
+        super().__setattr__("pos_y", self.posicio_y)
+
+        super().Pintar(finestraJoc)
 
     def Reaccion_pelota(self, jugador1, jugador2, posicion_horizontal_central, posicion_vertical_central_self):
 
@@ -59,12 +62,16 @@ class Pelota(ObjetoEscenario):
                 self.comprobar_positivo_negativo()
 
         # fuera de la zona de juego
-        if self.posicio_x + self.medida >= Constantes.TAMANO_VENTANA[
-            0] + 15 or self.posicio_x - self.medida <= -15:
+        if self.posicio_x + self.medida >= Constantes.TAMANO_VENTANA[0] + 15 or self.posicio_x - self.medida <= -15:
+            if self.posicio_x - self.medida <= -15:
+                jugador2.sumar_puntucacion()
+            else:
+                jugador1.sumar_puntucacion()
+
             self.reset_Pelota(posicion_horizontal_central, posicion_vertical_central_self)
 
-    def comprobar_positivo_negativo(self, ):
-        if self.velocitad_x <= 15 or self.velocitad_x >= -15:
+    def comprobar_positivo_negativo(self):
+        if 10 >= self.velocitad_x >= -10:
             if self.velocitad_x <= 0:
                 self.velocitad_x -= 5
             else:
@@ -74,5 +81,8 @@ class Pelota(ObjetoEscenario):
     def reset_Pelota(self, posicion_horizontal_central, posicion_vertical_central_self):
         self.posicio_x = posicion_horizontal_central - 5
         self.posicio_y = posicion_vertical_central_self
-        self.velocitad_x = 5
-        self.velocitad_y = 5
+        velocidad_x = 0
+        while -2 <= velocidad_x <= 2 or velocidad_x == 0:
+            self.velocitad_x = random.randint(-5, 5)
+            velocidad_x = self.velocitad_x
+        self.velocitad_y = random.randint(-5, 5)
